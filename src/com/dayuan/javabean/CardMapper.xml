@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.data.CardMapper">
+	<select id="selectCardById" parameterType="int" resultType="hashmap">
+		select * from a_card where id = #{id}
+	</select>
+
+	<select id="selectCardById2" parameterType="int" resultType="Card">
+		select id, card_no as cardNo, password from a_card where id = #{id}
+	</select>
+
+	<!-- 动态sql实例 -->
+	<select id="selectCardById3" parameterType="hashmap" resultType="Card">
+		select id, card_no as cardNo, password from a_card
+		where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="cardNo != null">
+			and card_no = #{cardNo}
+		</if>
+	</select>
+
+	<!-- 动态sql实例 -->
+	<select id="selectCardById4" parameterType="hashmap" resultType="Card">
+		select id, card_no as cardNo, password from a_card
+		where 1=1
+		<choose>
+			<when test="id != null">
+				and id = #{id}
+			</when>
+			<when test="cardNo != null">
+				and card_no = #{cardNo}
+			</when>
+			<otherwise></otherwise>
+		</choose>
+	</select>
+
+	<!-- 动态sql实例 -->
+	<select id="selectCardById5" parameterType="hashmap" resultType="Card">
+		select id, card_no as cardNo, password from a_card
+		<where>
+			<!-- <trim prefix="WHERE" prefixOverrides="AND |OR "> -->
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="cardNo != null">
+				and card_no = #{cardNo}
+			</if>
+			<!-- </trim> -->
+		</where>
+	</select>
+
+	<!-- 动态sql实例 -->
+	<select id="selectCardById6" parameterType="list" resultType="Card">
+		select id, card_no as cardNo, password from a_card
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<insert id="insertCard" parameterType="Card" keyProperty="id"
+		useGeneratedKeys="true">
+		insert into a_card
+		(card_no,password,money,persion_id) values
+		(#{cardNo},#{password},#{money},#{persionId})
+	</insert>
+
+	<update id="updateCardById" parameterType="Card">
+		update a_card set
+		password=#{password} where id=#{id}
+	</update>
+
+	<delete id="deleteCardById" parameterType="int">
+		delete from a_card
+		where id=#{id}
+	</delete>
+</mapper>

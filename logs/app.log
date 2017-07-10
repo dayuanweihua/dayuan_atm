@@ -1,0 +1,6 @@
+2017-06-08 13:36:55 ERROR test.Test2.main(19) | Thie is a log message from the myLogger
+2017-06-08 13:36:55 FATAL test.Test2.main(20) | Thie is a log message from the myLogger
+2017-06-08 13:37:13 ERROR test.Test2.main(19) | Thie is a log message from the myLogger
+2017-06-08 13:37:13 FATAL test.Test2.main(20) | Thie is a log message from the myLogger
+2017-06-08 13:37:27 ERROR test.Test2.main(19) | Thie is a log message from the myLogger
+2017-06-08 13:37:27 FATAL test.Test2.main(20) | Thie is a log message from the myLogger
